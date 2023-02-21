@@ -1493,6 +1493,10 @@ def troubleshooter(bltb_mode : bool = False):
             print("Data recovery finished. Number of items successfully recovered: "+str(booksSalvaged))
         else:
             print("No data found in folder 'booklist' to be retrieved from.")
+    if not ((os.path.isfile("progvar.bak") and os.path.isfile("progvar.dat") and os.path.isfile("progvar.dir")) or os.path.isfile("progvar.db")):
+        errorFound = True
+        with shelve.open("progvar"): pass
+        print("Progvar file found deleted.\nRestoring completed.")
     print("Troubleshooting completed.")
     if errorFound:
         print("All troubles found were fixed to the best of my ability.")
@@ -1521,7 +1525,6 @@ def factoryReset():
         with shelve.open("booklist"): pass    # Just creating a file and nothing else
 
         progvar = shelve.open("progvar")    # reset the program variables
-        progvar["progFormat"] = False
         progvar["autoTitle"] = True
         progvar.close()
 
@@ -1563,8 +1566,9 @@ print("BOOKREK - Your Bookreading Mate!\nVersion "+version+"\n")  # Welcome mess
 print("Type 'b!help' for the list of commands.")
 
 # Initially the value is set to True, so that the program gets formatted the first time it is run
-with shelve.open("progvar") as progvar:
-    if progvar["progFormat"]: factoryReset()
+if os.path.isfile("progFmt.txt"):
+    os.remove("progFmt.txt")
+    factoryReset()
 
 while True:
     mainCommand = input("\n(main_command) >>> ").lower().replace(" ", "")
