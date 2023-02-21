@@ -1524,6 +1524,11 @@ def factoryReset():
         # No linux support cuz idk
         with shelve.open("booklist"): pass    # Just creating a file and nothing else
 
+        if os.path.isfile("progvar.bak"): os.remove("progvar.bak")
+        if os.path.isfile("progvar.dat"): os.remove("progvar.dat")
+        if os.path.isfile("progvar.dir"): os.remove("progvar.dir")
+        if os.path.isfile("progvar.db"): os.remove("progvar.db")
+
         progvar = shelve.open("progvar")    # reset the program variables
         progvar["autoTitle"] = True
         progvar.close()
