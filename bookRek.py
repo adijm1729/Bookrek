@@ -1570,10 +1570,9 @@ def settings():
 print("BOOKREK - Your Bookreading Mate!\nVersion "+version+"\n")  # Welcome message
 print("Type 'b!help' for the list of commands.")
 
-# Initially the value is set to True, so that the program gets formatted the first time it is run
 if os.path.isfile("progFmt.txt"):
     os.remove("progFmt.txt")
-    factoryReset()
+    factoryReset()  # For a first-time run
 
 while True:
     mainCommand = input("\n(main_command) >>> ").lower().replace(" ", "")
