@@ -1,4 +1,4 @@
-# Bookrek
+# Bookrek 1.0
 It is a simple (currently CUI) program that lets you maintain a record of the books you read.
 
 How to install:
