@@ -1,7 +1,7 @@
 #! python
 # Creator-> Aditya Nayak
 # This is Bookrek, a record-keeper of the books I read and certain other info about them
-version = "1.0"
+version = "1.0.0"
 
 # Imports
 from calendar import isleap
@@ -1597,70 +1597,71 @@ def settings():
 
 
 # ----------------------------------------------Main Code--------------------------------------------
-print("BOOKREK - Your Bookreading Mate!\nVersion "+version+"\n")  # Welcome message
-print("Type 'b!help' for the list of commands.")
+if __name__ == '__main__':
+    print("BOOKREK - Your Bookreading Mate!\nVersion "+version+"\n")  # Welcome message
+    print("Type 'b!help' for the list of commands.")
 
-if os.path.isfile("progFmt.txt"):
-    print("Formatting the program (setting it up for a first-time use)...")
-    os.remove("progFmt.txt")
-    factoryReset(True)  # For a first-time run
+    if os.path.isfile("progFmt.txt"):
+        print("Formatting the program (setting it up for a first-time use)...")
+        os.remove("progFmt.txt")
+        factoryReset(True)  # For a first-time run
 
-while True:
-    mainCommand = input("\n(main_command) >>> ").lower().replace(" ", "")
-    if mainCommand == "b!help":
-        print("""MAIN_COMMAND ACCEPTED INPUT LIST
-> To view the book list:
-    view list
-    view book list
-    vbl
-> To add a new book's data:
-    add new book
-    add book
-    anb
-    addnew
-> To view/edit a book's data in details:
-    view book
-    view book details
-    vbd
-    edit book
-    edit book details
-    ebd
-> To view/edit the settings:
-    settings
-    b!settings
-> To troubleshoot any issues:
-    troubleshooter
-    tb
-> To troubleshoot the booklist particularly in bltb mode:
-    booklist troubleshooter
-    bltb
-> To factory reset the program:
-    reset
-    factory reset
-    format
-    reformat
-> To quit the program:
-    quit
-    close
-    exit""")
-    elif mainCommand == "viewlist" or mainCommand == "viewbooklist" or mainCommand == "vbl":
-        viewBookList()
-    elif mainCommand == "addnewbook" or mainCommand == "addbook" or mainCommand == "anb" or mainCommand == "addnew":
-        addNewBook()
-    elif mainCommand in ["viewbook", "viewbookdetails", "vbd", "editbook", "editbookdetails", "ebd"]:
-        viewBookDetails()
-    elif mainCommand == "troubleshooter" or mainCommand == "tb":
-        troubleshooter()
-    elif mainCommand == "booklisttroubleshooter" or mainCommand == "bltb":
-        troubleshooter(True)
-    elif mainCommand == "quit" or mainCommand == "close" or mainCommand == "exit":
-        print("Thank you for using BOOKREK. Wish you a nice day ahead!")
-        quit("Program terminated successfully.")
-    elif mainCommand in ["reset", "factoryreset", "format", "reformat"]: factoryReset()
-    elif mainCommand in ["settings", "b!settings"]: settings()
-    else:
-        print("Invalid input. Please enter one of the allowed commands only.")
-        print("Type 'b!help' for the list of commands.")
+    while True:
+        mainCommand = input("\n(main_command) >>> ").lower().replace(" ", "")
+        if mainCommand == "b!help":
+            print("""MAIN_COMMAND ACCEPTED INPUT LIST
+    > To view the book list:
+        view list
+        view book list
+        vbl
+    > To add a new book's data:
+        add new book
+        add book
+        anb
+        addnew
+    > To view/edit a book's data in details:
+        view book
+        view book details
+        vbd
+        edit book
+        edit book details
+        ebd
+    > To view/edit the settings:
+        settings
+        b!settings
+    > To troubleshoot any issues:
+        troubleshooter
+        tb
+    > To troubleshoot the booklist particularly in bltb mode:
+        booklist troubleshooter
+        bltb
+    > To factory reset the program:
+        reset
+        factory reset
+        format
+        reformat
+    > To quit the program:
+        quit
+        close
+        exit""")
+        elif mainCommand == "viewlist" or mainCommand == "viewbooklist" or mainCommand == "vbl":
+            viewBookList()
+        elif mainCommand == "addnewbook" or mainCommand == "addbook" or mainCommand == "anb" or mainCommand == "addnew":
+            addNewBook()
+        elif mainCommand in ["viewbook", "viewbookdetails", "vbd", "editbook", "editbookdetails", "ebd"]:
+            viewBookDetails()
+        elif mainCommand == "troubleshooter" or mainCommand == "tb":
+            troubleshooter()
+        elif mainCommand == "booklisttroubleshooter" or mainCommand == "bltb":
+            troubleshooter(True)
+        elif mainCommand == "quit" or mainCommand == "close" or mainCommand == "exit":
+            print("Thank you for using BOOKREK. Wish you a nice day ahead!")
+            quit("Program terminated successfully.")
+        elif mainCommand in ["reset", "factoryreset", "format", "reformat"]: factoryReset()
+        elif mainCommand in ["settings", "b!settings"]: settings()
+        else:
+            print("Invalid input. Please enter one of the allowed commands only.")
+            print("Type 'b!help' for the list of commands.")
 
 """
 PROTOCOL FOR SAVING BOOKDATA IN BOOKLIST
