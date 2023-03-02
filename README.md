@@ -1,11 +1,11 @@
-# Bookrek 1.0
+# Bookrek 1.0.0
 It is a simple (currently CUI) program that lets you maintain a record of the books you read.
 
 How to install:
-- For a python developer or anyone else with python on their device, simply download the bookRek.py file and the progFmt.txt file (NECESSARY), and run bookRek.py
+- Just download the installer and run it, all required files will be installed on your computer
 
 How to use:
-- Run the program
+- Run the application named 'bookRek'
 - Follow all instructions shown on-screen always when using the program
 - Key in 'b!help' when in doubt. Help messages have been adequately added.
 
