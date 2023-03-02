@@ -1504,10 +1504,42 @@ def troubleshooter(bltb_mode : bool = False):
     else: print("No errors found.")
 
 
-def factoryReset():
+def factoryReset(first_time : bool = False):
     "This function is used to format the program when necessary or on user's demand."
 
-    if yesNoConfirmation("The program will be reformatted and all your data will be lost. Are you sure you wish to proceed?"):
+    if not first_time:
+        if yesNoConfirmation("The program will be reformatted and all your data will be lost. Are you sure you wish to proceed?"):
+            osName = system()
+
+            if os.path.isdir("bookdata"):
+                for i in os.listdir("bookdata"):
+                    os.remove(os.path.join(".", "bookdata", i))
+            else: os.mkdir("bookdata")
+
+            with shelve.open("booklist"): pass  # Ensuring that the required shelf file exists
+            if osName == "Windows":
+                os.remove(".\\booklist.bak")
+                os.remove(".\\booklist.dat")
+                os.remove(".\\booklist.dir")
+            elif osName == "Darwin": os.remove("./booklist.db")
+            # No linux support cuz idk
+            with shelve.open("booklist"): pass    # Just creating a file and nothing else
+
+            if os.path.isfile("progvar.bak"): os.remove("progvar.bak")
+            if os.path.isfile("progvar.dat"): os.remove("progvar.dat")
+            if os.path.isfile("progvar.dir"): os.remove("progvar.dir")
+            if os.path.isfile("progvar.db"): os.remove("progvar.db")
+
+            progvar = shelve.open("progvar")    # reset the program variables
+            progvar["autoTitle"] = True
+            progvar.close()
+
+            # Since idk how to restart a program, let's just pretend that the program was restarted
+            print("BOOKREK - Your Bookreading Mate!\nVersion "+version+"\n")
+            print("Type 'b!help' for the list of commands.")
+
+        else: print("Reverting to main_command...")
+    else:
         osName = system()
 
         if os.path.isdir("bookdata"):
@@ -1536,8 +1568,6 @@ def factoryReset():
         # Since idk how to restart a program, let's just pretend that the program was restarted
         print("BOOKREK - Your Bookreading Mate!\nVersion "+version+"\n")
         print("Type 'b!help' for the list of commands.")
-
-    else: print("Reverting to main_command...")
 
 
 def settings():
@@ -1571,8 +1601,9 @@ print("BOOKREK - Your Bookreading Mate!\nVersion "+version+"\n")  # Welcome mess
 print("Type 'b!help' for the list of commands.")
 
 if os.path.isfile("progFmt.txt"):
+    print("Formatting the program (setting it up for a first-time use)...")
     os.remove("progFmt.txt")
-    factoryReset()  # For a first-time run
+    factoryReset(True)  # For a first-time run
 
 while True:
     mainCommand = input("\n(main_command) >>> ").lower().replace(" ", "")
@@ -1696,7 +1727,7 @@ FEATURES TO BUILD
 
 Planning in future:
     - option to change all dates to MM/DD/YYYY for americans
-    - learn regex, and implement it in multiple places. this can help avoid potential errors.
+    - implement regex in multiple places. this can help avoid potential errors.
 """
 
 # NOTE: To anyone other than me viewing this code, please excuse the variable names. For those that never get used again, I just assign utterly random
